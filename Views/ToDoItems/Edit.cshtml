@@ -1,0 +1,22 @@
+﻿@model ToDoItem
+<h1>Edit Your Task</h1>
+<form>
+    <div class="mb-3">
+        <label for="Title" class="form-label">Title:</label>
+        <input type="text" class="form-control" id="Title" aria-describedby="Title" name="Title" value="@Model.Title">
+
+    </div>
+    <div class="mb-3">
+        <label for="Description" class="form-label">Description:</label>
+        <input type="text" class="form-control" id="Description" aria-describedby="Description" name="Description" value="@Model.Description">
+
+    </div>
+    <div class="mb-3">
+        <label for="Deadline" class="form-label">Deadline:</label>
+        <input type="date" class="form-control" id="Deadline" aria-describedby="Deadline" name="Deadline" value="@Model.Deadline">
+
+    </div>
+
+
+    <button type="submit" class="btn btn-info">Save</button>
+</form>
