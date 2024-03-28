@@ -11,18 +11,20 @@ namespace Task2MVC.Controllers
         ApplicationDbContext context = new ApplicationDbContext();
         public IActionResult Index()
         {
-
-            return View();
-        }
-
-
-
-        public IActionResult Items()
-        {
             var result = context.ToDoItems.ToList();
             ViewData["msg"] = Request.Cookies["name"];
             return View(result);
+
         }
+
+
+
+        //public IActionResult Items()
+        //{
+        //    var result = context.ToDoItems.ToList();
+        //    ViewData["msg"] = Request.Cookies["name"];
+        //    return View(result);
+        //}
 
         public IActionResult CreateNewInList()
         {
@@ -33,7 +35,7 @@ namespace Task2MVC.Controllers
             context.ToDoItems.Add(new Models.ToDoItem { Title = toDoItem.Title, Description = toDoItem.Description, Deadline = toDoItem.Deadline });
             context.SaveChanges();
 
-            return RedirectToAction("Items");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
@@ -42,29 +44,27 @@ namespace Task2MVC.Controllers
             context.ToDoItems.Remove(item);
             context.SaveChanges();
 
-            return RedirectToAction("Items");
+            return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int id)
         {
-            var item = context.ToDoItems.Where(e=>e.Id== id);
-
-            return View(item);
+            ToDoItem todo=context.ToDoItems.Find(id);  
+            return View(todo);
+            
         }
-        [HttpPost]
-        public ActionResult Edit(Models.ToDoItem toDoItem)
+      
+        public ActionResult SaveEdit(ToDoItem toDoItem)
         {
-           var item = context.ToDoItems.Find(toDoItem.Id);
+            ToDoItem? ToDoItem = context.ToDoItems.Find(toDoItem.Id);
 
-            if (item is not null)
-            {
-                item.Title = toDoItem.Title;
-                item.Description = toDoItem.Description;
-                item.Deadline = toDoItem.Deadline;
-                context.SaveChanges();
+            ToDoItem.Title = toDoItem.Title;
+            ToDoItem.Description = toDoItem.Description;
+            ToDoItem.Deadline = toDoItem.Deadline;
+            context.SaveChanges();
 
-            }
-            return RedirectToAction("Items");
+           
+            return RedirectToAction("Index");
         }
         
         
