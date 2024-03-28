@@ -1,19 +1,22 @@
 ﻿@model ToDoItem
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
 <h1>Edit Your Task</h1>
-<form>
+<form action="/ToDoItems/SaveEdit">
     <div class="mb-3">
+        <input type="hidden" name="Id" value="@Model.Id">
         <label for="Title" class="form-label">Title:</label>
-        <input type="text" class="form-control" id="Title" aria-describedby="Title" name="Title" value="@Model.Title">
+        <input type="text" value="@Model.Title" class="form-control" id="Title" aria-describedby="Title" name="Title">
 
     </div>
     <div class="mb-3">
         <label for="Description" class="form-label">Description:</label>
-        <input type="text" class="form-control" id="Description" aria-describedby="Description" name="Description" value="@Model.Description">
+        <input type="text" value="@Model.Description" class="form-control" id="Description" aria-describedby="Description" name="Description">
 
     </div>
     <div class="mb-3">
         <label for="Deadline" class="form-label">Deadline:</label>
-        <input type="date" class="form-control" id="Deadline" aria-describedby="Deadline" name="Deadline" value="@Model.Deadline">
+        <input type="date" value="@Model.Deadline" class="form-control" id="Deadline" aria-describedby="Deadline" name="Deadline">
 
     </div>
 
